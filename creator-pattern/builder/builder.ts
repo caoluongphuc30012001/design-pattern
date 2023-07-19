@@ -1,3 +1,6 @@
+/**
+ * Lớp TypeProduct đại diện cho loại sản phẩm.
+ */
 export class TypeProduct {
   name: string;
   constructor(name: string) {
@@ -5,6 +8,9 @@ export class TypeProduct {
   }
 }
 
+/**
+ * Lớp InforProduct đại diện cho thông tin sản phẩm.
+ */
 export class InforProduct {
   name: string;
   price: number;
@@ -27,6 +33,9 @@ export class InforProduct {
   }
 }
 
+/**
+ * Lớp BrandProduct đại diện cho thương hiệu sản phẩm.
+ */
 export class BrandProduct {
   country?: string;
   brandName: string;
@@ -36,6 +45,9 @@ export class BrandProduct {
   }
 }
 
+/**
+ * Lớp Product đại diện cho sản phẩm.
+ */
 class Product {
   private quantity: number;
   private typeProduct: TypeProduct;
@@ -54,31 +66,59 @@ class Product {
   }
 }
 
+/**
+ * Lớp ProductBuilder đại diện cho builder của sản phẩm.
+ */
 export class ProductBuilder {
   private quantity: number = 0;
   private typeProduct: TypeProduct = new TypeProduct("");
   private inforProduct: InforProduct = new InforProduct("", 0);
   private brandProduct: BrandProduct = new BrandProduct("");
+
+  /**
+   * Thiết lập loại sản phẩm.
+   * @param typeProduct Loại sản phẩm.
+   * @returns Trả về đối tượng ProductBuilder.
+   */
   setTypeProduct(typeProduct: TypeProduct): ProductBuilder {
     this.typeProduct = typeProduct;
     return this;
   }
 
+  /**
+   * Thiết lập thương hiệu sản phẩm.
+   * @param brandProduct Thương hiệu sản phẩm.
+   * @returns Trả về đối tượng ProductBuilder.
+   */
   setBrandProduct(brandProduct: BrandProduct): ProductBuilder {
     this.brandProduct = brandProduct;
     return this;
   }
 
+  /**
+   * Thiết lập thông tin sản phẩm.
+   * @param inforProduct Thông tin sản phẩm.
+   * @returns Trả về đối tượng ProductBuilder.
+   */
   setInforProduct(inforProduct: InforProduct): ProductBuilder {
     this.inforProduct = inforProduct;
     return this;
   }
 
+  /**
+   * Thiết lập số lượng sản phẩm.
+   * @param quantity Số lượng sản phẩm.
+   * @returns Trả về đối tượng ProductBuilder.
+   */
   setQuantity(quantity: number): ProductBuilder {
     this.quantity = quantity;
     return this;
   }
 
+  /**
+   * Xây dựng sản phẩm.
+   * @returns Trả về đối tượng Product.
+   */
   builder(): Product {
     return new Product(
       this.quantity,

@@ -1,10 +1,19 @@
-import { Group, User } from "./mediator";
+import { AdminChangeInformationUser } from './mediator';
+/**
+ * https://viblo.asia/p/mediator-design-pattern-tro-thu-dac-luc-cua-developers-m68Z0jVj5kGß
+ */
 
-const groupChat = new Group();
+import { Admin, User } from "./mediator";
 
-const user1 = new User("user1", groupChat);
-const user2 = new User("user2", groupChat);
-const user3 = new User("user3", groupChat);
-const user4 = new User("user4", groupChat);
+const user1 = new User("phuc");
 
-user1.sendMessage("hello world");
+const admin = new Admin<AdminChangeInformationUser>("admin");
+
+const adminChangeInformationUser= new AdminChangeInformationUser();
+
+adminChangeInformationUser.addComponent(admin);
+adminChangeInformationUser.addComponent(user1);
+
+admin.changeName(1,'Nghia')
+
+console.log(user1.getName());

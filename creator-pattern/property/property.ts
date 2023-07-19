@@ -16,7 +16,7 @@ export class User {
   }
   clone(): this {
     const component = new User();
-    const clone = Object.setPrototypeOf({ ...this }, component);
+    const clone = Object.setPrototypeOf(this, {...component});
     return clone;
   }
 }

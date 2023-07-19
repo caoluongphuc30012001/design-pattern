@@ -5,8 +5,8 @@
  * Decorator pattern sử dụng composition thay vì inheritance (thừa kế) để mở rộng đối tượng. Decorator pattern còn được gọi là Wrapper hay Smart Proxy.
  */
 
-import { EmployeeConcreteComponent, Manager, TeamLeader } from "./decorator";
-const newEmployee = new EmployeeConcreteComponent("phuc");
+import { Employee, Manager, TeamLeader } from "./decorator";
+const newEmployee = new Employee("phuc");
 
 const newLeader = new TeamLeader(newEmployee);
 

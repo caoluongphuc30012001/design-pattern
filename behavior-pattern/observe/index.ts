@@ -1,3 +1,4 @@
+
 /**
  * Đây là pattern phục vụ nhiều observer cùng quan sát 1 subject cụ thể.
  * Và subject đó có thể gửi thông báo cho toàn bộ các observer nào đang quan sát nó.
@@ -13,15 +14,25 @@ class Observer {
   constructor(name: string) {
     this.name = name;
   }
+  /**
+   * Phương thức này được gọi khi subject mà observer đang quan sát thay đổi.
+   */
   public update(): void {
     console.log("update::", this.name);
   }
 }
 
+/**
+ * Subject là đối tượng mà các observer quan sát.
+ */
 class Subject {
   private listObserver: Observer[] = [];
   constructor() {}
 
+  /**
+   * Thêm observer vào danh sách quan sát.
+   * @param observer Observer cần thêm vào danh sách quan sát.
+   */
   public attach(observer: Observer): void {
     if (this.listObserver.includes(observer)) {
       console.log("Đã tồn tại");
@@ -30,6 +41,10 @@ class Subject {
     }
   }
 
+  /**
+   * Xóa observer khỏi danh sách quan sát.
+   * @param observer Observer cần xóa khỏi danh sách quan sát.
+   */
   public detach(observer: Observer): void {
     if (this.listObserver.includes(observer)) {
       const index = this.listObserver.indexOf(observer);
@@ -39,10 +54,17 @@ class Subject {
     }
   }
 
+  /**
+   * Gửi thông báo đến toàn bộ các observer đang quan sát.
+   */
   public notify(): void {
     for (const observer of this.listObserver) observer.update();
   }
 
+  /**
+   * Lấy số lượng observer đang quan sát.
+   * @returns Số lượng observer đang quan sát.
+   */
   public getCountObserver(): number {
     return this.listObserver.length;
   }

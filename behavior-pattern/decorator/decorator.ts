@@ -1,3 +1,4 @@
+
 interface EmployeeComponent {
   getName(): string;
   doTask(): void;
@@ -5,13 +6,25 @@ interface EmployeeComponent {
   terminate(): void;
 }
 
-export class EmployeeConcreteComponent implements EmployeeComponent {
+/**
+ * Class cho nhân viên
+ * @param {string} name
+ */
+export class Employee implements EmployeeComponent {
   private name: string;
 
+  /**
+   * Get name của nhân viên
+   * @returns {string} name
+   */
   public getName(): string {
     return this.name;
   }
 
+  /**
+   * Set name của nhân viên
+   * @param {string}name 
+   */
   public setName(name: string): void {
     this.name = name;
   }
@@ -20,14 +33,24 @@ export class EmployeeConcreteComponent implements EmployeeComponent {
     this.name = name;
   }
 
+  /**
+   * Tham gia ngày?
+   * @param {Date} joinDate 
+   */
   join(joinDate: Date): void {
     console.log(this.name, "join", joinDate.toDateString());
   }
 
+  /**
+   * Đang làm task nào
+   */
   doTask(): void {
     console.log(this.name, "do task");
   }
 
+  /**
+   * Terminate
+   */
   terminate(): void {
     console.log(this.name, "terminate");
   }
@@ -55,14 +78,22 @@ class EmployeeDecorator implements EmployeeComponent {
     this.employeeComponent.doTask();
   }
 }
-
+/**
+ * Class cho leader
+ */
 export class TeamLeader extends EmployeeDecorator {
+  /**
+   * Thông báo
+   */
   notify(): void {
     console.log(this.employeeComponent.getName(), "notify");
   }
 }
 
 export class Manager extends EmployeeDecorator {
+  /**
+   * Assign task
+   */
   assign(): void {
     console.log(this.employeeComponent.getName(), "assign");
   }

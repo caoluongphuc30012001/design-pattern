@@ -1,42 +1,75 @@
-abstract class Mediator {
-  abstract notify(message: string): void;
-  abstract addUser(user: Component): void;
+class Component{
+  protected mediator: Mediator;
+  setMediator(mediator: Mediator):void{
+    this.mediator = mediator
+  }
+
+  constructor(){}
 }
 
-abstract class Component {
-  abstract sendMessage(message: string): void;
-  abstract receiveMessage(message: string): void;
+abstract class Mediator{
+  abstract excute(agrs: any):void
+  abstract addComponent(component: Component):void;
 }
 
+/**
+ * Đây là class cho User
+ */
 export class User extends Component {
-  private name: string;
-  private group: Mediator;
+  /**
+   * @param {string} name
+   */
+  private name: string
 
-  constructor(name: string, group: Mediator) {
+  constructor(name: string){
     super();
-    this.name = name;
-    this.group = group;
-    group.addUser(this);
+    this.name = name
+  }
+  /**
+   * Lấy tên người dùng
+   * @returns {string}name
+   */
+  getName(): string{
+    return this.name
   }
 
-  sendMessage(message: string): void {
-    this.group.notify(message);
+  /**
+   * Set tên người dùng
+   * @param name 
+   */
+  setName(name: string): void{
+    this.name= name
   }
 
-  receiveMessage(message: string): void {
-    console.log(this.name, message);
+  /**
+   * Set mediator
+   * @param mediator 
+   */
+  setMediator(mediator:Mediator){
+    this.mediator = mediator
   }
 }
 
-export class Group extends Mediator {
-  listUser: Component[] = [];
-  addUser(user: Component): void {
-    this.listUser.push(user);
+export class Admin<T extends Mediator> extends User {
+  protected mediator: T;
+  changeName(index: number,name: string){
+    this.mediator.excute([index,name]);
+  }
+}
+
+export class AdminChangeInformationUser implements Mediator{
+  private listUser: User[]
+
+  constructor() {
+    this.listUser = [];
   }
 
-  notify(message: string): void {
-    for (let user of this.listUser) {
-      user.receiveMessage(message);
-    }
+  addComponent(user: User): void {
+    this.listUser = [...this.listUser,user]
+    user.setMediator(this);
+  }
+
+  excute(agrs: [number, string]): void {
+    this.listUser[agrs[0]].setName(agrs[1]);
   }
 }

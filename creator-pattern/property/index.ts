@@ -5,6 +5,7 @@ const user1 = new User();
 
 const user2 = user1.clone();
 
-user1.setFullname("hihi");
-user2.setFullname("abc");
-console.log(user2.getFullname());
+
+console.log(Object.getPrototypeOf(user1))
+console.log(Object.getPrototypeOf(user2))
+console.log(user1===user2)

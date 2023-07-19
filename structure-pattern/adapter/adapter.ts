@@ -1,3 +1,7 @@
+/**
+ * Đây là class Account
+ * @param {string} fullname
+ */
 export class Account {
   private fullname: string = "";
   getName(): string {
@@ -5,6 +9,11 @@ export class Account {
   }
 }
 
+/**
+ * Đây là class User
+ * @param {string} firstname
+ * @param {string} lastname
+ */
 export class User {
   public firstname: string;
   public lastname: string;

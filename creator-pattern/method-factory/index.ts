@@ -3,15 +3,25 @@
  * Ví dụ: Khi chúng ta truyền type là book => hàm sẽ trả về 1 instance của class Book, nếu type truyền vào là Toy thì hàm sẽ trả về instance của Toy
  */
 
+
+/**
+ * Interface mô tả các thuộc tính của một sản phẩm
+ */
 interface Product {
   name: string;
   price: number;
 }
 
+/**
+ * Lớp trừu tượng ProductFactory định nghĩa phương thức tạo sản phẩm
+ */
 abstract class ProductFactory {
   abstract createProduct(name: string, price: number): void;
 }
 
+/**
+ * Lớp BookFactory kế thừa từ lớp ProductFactory và định nghĩa phương thức tạo sản phẩm sách
+ */
 class BookFactory extends ProductFactory {
   createProduct(name: string, price: number) {
     console.log({
@@ -22,6 +32,9 @@ class BookFactory extends ProductFactory {
   }
 }
 
+/**
+ * Lớp ToyFactory kế thừa từ lớp ProductFactory và định nghĩa phương thức tạo sản phẩm đồ chơi
+ */
 class ToyFactory extends ProductFactory {
   createProduct(name: string, price: number) {
     console.log({
@@ -32,12 +45,20 @@ class ToyFactory extends ProductFactory {
   }
 }
 
+/**
+ * Lớp Store định nghĩa phương thức tạo sản phẩm dựa trên ProductFactory được truyền vào
+ */
 class Store {
   private productFactory: ProductFactory;
   constructor(productFactory: ProductFactory) {
     this.productFactory = productFactory;
   }
 
+  /**
+   * Phương thức tạo sản phẩm dựa trên ProductFactory được truyền vào
+   * @param name Tên sản phẩm
+   * @param price Giá sản phẩm
+   */
   createProduct(name: string, price: number) {
     return this.productFactory.createProduct(name, price);
   }

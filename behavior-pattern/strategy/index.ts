@@ -9,18 +9,24 @@
 
 import { DiscountStrategy, Ticket } from "./strategy";
 
+/** Lớp Discount10Percents thực hiện giao diện DiscountStrategy và cung cấp phương thức getDiscount() để trả về giá trị giảm giá 10%.
+ */
 class Discount10Percents implements DiscountStrategy {
   getDiscount(): number {
     return 10;
   }
 }
 
+/** Lớp Discount50Percents thực hiện giao diện DiscountStrategy và cung cấp phương thức getDiscount() để trả về giá trị giảm giá 50%.
+ */
 class Discount50Percents implements DiscountStrategy {
   getDiscount(): number {
     return 50;
   }
 }
 
+/** Lớp Discount70Percents thực hiện giao diện DiscountStrategy và cung cấp phương thức getDiscount() để trả về giá trị giảm giá 70%.
+ */
 class Discount70Percents implements DiscountStrategy {
   getDiscount(): number {
     return 70;
