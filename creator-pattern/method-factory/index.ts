@@ -10,6 +10,40 @@
 interface Product {
   name: string;
   price: number;
+  getInfor():void;
+}
+
+class ToyProduct implements Product {
+  name: string;
+  price: number;
+  constructor(name: string, price: number) {
+    this.name = name;
+    this.price = price;
+  }
+
+  getInfor(): void {
+    console.log({
+      type: "toy",
+      name: this.name,
+      price: this.price,
+    });
+  }
+}
+
+class BookProduct implements Product{
+  name: string;
+  price: number;
+  constructor(name: string, price: number) {
+    this.name = name;
+    this.price = price;
+  }
+  getInfor(): void {
+    console.log({
+      type: "book",
+      name: this.name,
+      price: this.price,
+    });
+  }
 }
 
 /**
@@ -24,11 +58,7 @@ abstract class ProductFactory {
  */
 class BookFactory extends ProductFactory {
   createProduct(name: string, price: number) {
-    console.log({
-      type: "book",
-      name,
-      price,
-    });
+    return new BookProduct(name, price);
   }
 }
 
@@ -37,11 +67,7 @@ class BookFactory extends ProductFactory {
  */
 class ToyFactory extends ProductFactory {
   createProduct(name: string, price: number) {
-    console.log({
-      type: "toy",
-      name,
-      price,
-    });
+    return new ToyProduct(name, price);
   }
 }
 
@@ -70,5 +96,7 @@ const toyFactory = new ToyFactory();
 const store1 = new Store(bookFactory);
 const store2 = new Store(toyFactory);
 
-store1.createProduct("toan 1", 1000);
-store2.createProduct("xe hoi", 1000);
+const book = store1.createProduct("toan 1", 1000);
+const toy = store2.createProduct("xe hoi", 1000);
+
+console.log(book,toy)
