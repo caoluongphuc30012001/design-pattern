@@ -21,42 +21,65 @@
 
 
 
-
-
-interface Subject {
+/**
+ * Interface ISubject định nghĩa phương thức signRegister để ký hợp đồng.
+ */
+interface ISubject {
   signRegister(client: Client): void;
 }
 
-class Leader implements Subject {
+/**
+ * Lớp Leader hiện thực interface ISubject và định nghĩa phương thức signRegister để ký hợp đồng.
+ */
+class Leader implements ISubject {
   signRegister(client: Client): void {
     console.log("Kí hợp đồng");
   }
 }
 
-class ProxyPattern implements Subject {
-  subject: Subject;
-  constructor(subject: Subject) {
+/**
+ * Lớp ProxyPattern hiện thực interface ISubject và định nghĩa phương thức signRegister để kiểm tra tính hợp lệ của client trước khi ký hợp đồng.
+ */
+class ProxyPattern implements ISubject {
+  subject: ISubject;
+  constructor(subject: ISubject) {
     this.subject = subject;
   }
 
+  /**
+   * Phương thức signRegister kiểm tra tính hợp lệ của client trước khi ký hợp đồng.
+   * @param client đại diện cho client muốn ký hợp đồng.
+   */
   signRegister(client: Client): void {
     if (this.checkValid(client)) {
       this.subject.signRegister(client);
     }
   }
 
+  /**
+   * Phương thức checkValid kiểm tra tính hợp lệ của client.
+   * @param client đại diện cho client muốn ký hợp đồng.
+   * @returns trả về true nếu client hợp lệ và ngược lại.
+   */
   private checkValid(client: Client): boolean {
     if (client.name === "phuc") return true;
     return false;
   }
 }
 
+/**
+ * Lớp Client đại diện cho client muốn ký hợp đồng.
+ */
 class Client {
   name: string;
   constructor(name: string) {
     this.name = name;
   }
 
+  /**
+   * Phương thức applyFor để client muốn ký hợp đồng thông qua proxy.
+   * @param proxy đại diện cho proxy muốn ký hợp đồng.
+   */
   applyFor(proxy: ProxyPattern): void {
     proxy.signRegister(this);
   }

@@ -13,6 +13,9 @@ interface Product {
   getInfor():void;
 }
 
+/**
+ * Lớp ToyProduct và BookProduct định nghĩa các thuộc tính và phương thức của sản phẩm
+ */
 class ToyProduct implements Product {
   name: string;
   price: number;
@@ -21,6 +24,9 @@ class ToyProduct implements Product {
     this.price = price;
   }
 
+  /**
+   * Phương thức in ra thông tin của sản phẩm đồ chơi
+   */
   getInfor(): void {
     console.log({
       type: "toy",
@@ -37,6 +43,10 @@ class BookProduct implements Product{
     this.name = name;
     this.price = price;
   }
+
+  /**
+   * Phương thức in ra thông tin của sản phẩm sách
+   */
   getInfor(): void {
     console.log({
       type: "book",
